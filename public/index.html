@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beginner Strength & Fat Loss Gym Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f12;
+    --card: #1a1a22;
+    --card-hover: #22222e;
+    --accent: #e8ff47;
+    --accent2: #47ffa0;
+    --accent3: #ff6b47;
+    --accent4: #47c8ff;
+    --text: #e8e8ec;
+    --text-dim: #8888a0;
+    --border: #2a2a38;
+    --danger: #ff4757;
+    --success: #2ed573;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    padding: 60px 24px 40px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,255,71,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(232,255,71,0.1);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 40px;
+    border: 1px solid rgba(232,255,71,0.2);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 72px);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    color: var(--text-dim);
+    font-size: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px 24px 30px;
+  }
+  .stat-chip {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: center;
+    min-width: 130px;
+  }
+  .stat-chip .num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat-chip .label {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+  }
+
+  /* TABS */
+  .tab-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,15,18,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-container::-webkit-scrollbar { display: none; }
+  .tabs {
+    display: flex;
+    gap: 4px;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 8px 0;
+  }
+  .tab {
+    flex-shrink: 0;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-dim);
+    background: none;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+  .tab.active {
+    color: var(--bg);
+    background: var(--accent);
+  }
+
+  /* MAIN */
+  .main { max-width: 820px; margin: 0 auto; padding: 30px 20px 80px; }
+
+  /* SECTION */
+  .section { display: none; }
+  .section.active { display: block; animation: fadeUp 0.35s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    color: var(--text-dim);
+    font-size: 14px;
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  /* DAY CARD */
+  .day-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .day-card:hover { border-color: rgba(232,255,71,0.3); }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 22px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .day-header-left { display: flex; align-items: center; gap: 14px; }
+  .day-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--bg);
+    background: var(--accent);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+  .day-num.rest { background: var(--accent2); }
+  .day-num.cardio { background: var(--accent4); }
+  .day-name {
+    font-weight: 700;
+    font-size: 16px;
+  }
+  .day-focus {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+  .day-toggle {
+    font-size: 20px;
+    color: var(--text-dim);
+    transition: transform 0.3s;
+    background: none; border: none;
+    cursor: pointer;
+  }
+  .day-toggle.open { transform: rotate(180deg); color: var(--accent); }
+
+  .day-body {
+    display: none;
+    padding: 0 22px 22px;
+  }
+  .day-body.open { display: block; animation: fadeUp 0.25s ease; }
+
+  /* EXERCISE TABLE */
+  .ex-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  .ex-table thead th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .ex-table tbody td {
+    padding: 12px 8px 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    font-size: 14px;
+    vertical-align: top;
+  }
+  .ex-table tbody tr:last-child td { border-bottom: none; }
+  .ex-name {
+    font-weight: 600;
+  }
+  .ex-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--accent4);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 3px;
+    transition: color 0.2s;
+  }
+  .ex-link:hover { color: var(--accent); }
+  .ex-link svg { width: 12px; height: 12px; }
+  .sets-reps {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .rest-time {
+    color: var(--text-dim);
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  .note {
+    background: rgba(232,255,71,0.06);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 0 10px 10px 0;
+    margin-top: 14px;
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .note strong { color: var(--accent); }
+
+  /* CARDIO BLOCK */
+  .cardio-block {
+    background: rgba(71,200,255,0.06);
+    border: 1px solid rgba(71,200,255,0.15);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-top: 14px;
+  }
+  .cardio-block h4 {
+    color: var(--accent4);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .cardio-block p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  /* REST DAY CARD */
+  .rest-card {
+    background: rgba(47,255,160,0.04);
+    border: 1px solid rgba(47,255,160,0.12);
+    border-radius: 14px;
+    padding: 22px;
+    margin-bottom: 16px;
+  }
+  .rest-card h3 {
+    color: var(--accent2);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .rest-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .rest-card li {
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--text-dim);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .rest-card li:last-child { border-bottom: none; }
+  .rest-card li .icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 30px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--accent4));
+    border-radius: 2px;
+  }
+  .tl-item {
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -26px; top: 6px;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--bg);
+    z-index: 1;
+  }
+  .tl-item:nth-child(2)::before { background: var(--accent2); }
+  .tl-item:nth-child(3)::before { background: var(--accent4); }
+  .tl-item:nth-child(4)::before { background: var(--accent3); }
+  .tl-item:nth-child(5)::before { background: #c47fff; }
+  .tl-item:nth-child(6)::before { background: var(--accent); }
+
+  .tl-phase {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .tl-item:nth-child(1) .tl-phase { color: var(--accent); }
+  .tl-item:nth-child(2) .tl-phase { color: var(--accent2); }
+  .tl-item:nth-child(3) .tl-phase { color: var(--accent4); }
+  .tl-item:nth-child(4) .tl-phase { color: var(--accent3); }
+  .tl-item:nth-child(5) .tl-phase { color: #c47fff; }
+  .tl-item:nth-child(6) .tl-phase { color: var(--accent); }
+
+  .tl-title {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .tl-body {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .tl-body p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .tl-body p:last-child { margin-bottom: 0; }
+
+  .tl-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .tl-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: rgba(232,255,71,0.08);
+    color: var(--accent);
+    border: 1px solid rgba(232,255,71,0.15);
+  }
+
+  /* NUTRITION CARDS */
+  .nutri-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .nutri-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+  }
+  .nutri-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .nutri-card p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .nutri-card .highlight {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* TIPS LIST */
+  .tips-list {
+    list-style: none;
+    counter-reset: tip;
+  }
+  .tips-list li {
+    counter-increment: tip;
+    position: relative;
+    padding: 16px 16px 16px 52px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+  .tips-list li::before {
+    content: counter(tip);
+    position: absolute;
+    left: 16px; top: 16px;
+    width: 26px; height: 26px;
+    background: rgba(232,255,71,0.1);
+    color: var(--accent);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+
+  /* WARM-UP */
+  .warmup-box {
+    background: rgba(255,107,71,0.06);
+    border: 1px solid rgba(255,107,71,0.15);
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .warmup-box h3 {
+    color: var(--accent3);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .warmup-box p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 40px 16px 30px; }
+    .main { padding: 20px 14px 60px; }
+    .day-header { padding: 14px 16px; }
+    .day-body { padding: 0 16px 16px; }
+    .ex-table thead th:nth-child(3),
+    .ex-table tbody td:nth-child(3) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Beginner Program</div>
+  <h1>BUILD <span>STRENGTH</span><br>BURN FAT</h1>
+  <p>A complete 5-day gym split with progressive overload, mild cardio, rest day routines, and a full 12-month roadmap.</p>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-chip"><div class="num">5</div><div class="label">Days / Week</div></div>
+  <div class="stat-chip"><div class="num">60</div><div class="label">Min / Session</div></div>
+  <div class="stat-chip"><div class="num">12</div><div class="label">Month Plan</div></div>
+  <div class="stat-chip"><div class="num">2</div><div class="label">Rest Days</div></div>
+</div>
+
+<!-- TABS -->
+<div class="tab-container">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('weekly')">Weekly Split</button>
+    <button class="tab" onclick="showTab('rest')">Rest Days</button>
+    <button class="tab" onclick="showTab('progression')">6-12 Month Plan</button>
+    <button class="tab" onclick="showTab('nutrition')">Nutrition & Tips</button>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- ==================== WEEKLY SPLIT ==================== -->
+  <div class="section active" id="sec-weekly">
+    <div class="section-title">Weekly Training Split</div>
+    <div class="section-sub">Upper/Lower + Push/Pull/Legs hybrid split — ideal for beginners who want to train each muscle group thoroughly while keeping sessions manageable. Click each day to expand.</div>
+
+    <div class="warmup-box">
+      <h3>🔥 Before Every Workout — Warm-Up (10 min)</h3>
+      <p>
+        <strong>5 min</strong> — Light treadmill walk or cycling at an easy pace to raise heart rate.<br>
+        <strong>3 min</strong> — Dynamic stretches: arm circles, leg swings, hip circles, torso twists.<br>
+        <strong>2 min</strong> — 1 light warm-up set of your first exercise (50% of working weight, 12-15 reps).<br><br>
+        <a href="https://www.muscleandstrength.com/articles/warming-up" target="_blank" class="ex-link">
+          Full Warm-Up Guide <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg>
+        </a>
+      </p>
+    </div>
+
+    <!-- DAY 1 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-header-left">
+          <span class="day-num">DAY 1</span>
+          <div>
+            <div class="day-name">Upper Body — Push Focus</div>
+            <div class="day-focus">Chest, Shoulders, Triceps</div>
+          </div>
+        </div>
+        <button class="day-toggle">▼</button>
+      </div>
+      <div class="day-body">
+        <table class="ex-table">
+          <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="ex-name">Flat Barbell Bench Press</div>
+                <a href="https://www.muscleandstrength.com/exercises/barbell-bench-press.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">4 × 8-10</td>
+              <td class="rest-time">90 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Incline Dumbbell Press</div>
+                <a href="https://www.muscleandstrength.com/exercises/incline-dumbbell-bench-press.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10-12</td>
+              <td class="rest-time">75 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Overhead Dumbbell Shoulder Press</div>
+                <a href="https://www.muscleandstrength.com/exercises/seated-dumbbell-press.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10-12</td>
+              <td class="rest-time">75 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Dumbbell Lateral Raises</div>
+                <a href="https://www.muscleandstrength.com/exercises/dumbbell-lateral-raise.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 15</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Tricep Rope Pushdowns</div>
+                <a href="https://www.muscleandstrength.com/exercises/tricep-rope-pushdown.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 12-15</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Overhead Tricep Extension (Dumbbell)</div>
+                <a href="https://www.muscleandstrength.com/exercises/seated-dumbbell-tricep-extension.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 12</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="cardio-block">
+          <h4>🏃 Post-Workout Cardio</h4>
+          <p>15 min brisk incline treadmill walk (speed 5.5–6.5 km/h, incline 4–6%). Keep heart rate at 120–140 bpm. This is "Zone 2" fat-burning cardio — you should be able to hold a conversation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-header-left">
+          <span class="day-num">DAY 2</span>
+          <div>
+            <div class="day-name">Lower Body — Strength</div>
+            <div class="day-focus">Quads, Hamstrings, Glutes, Calves</div>
+          </div>
+        </div>
+        <button class="day-toggle">▼</button>
+      </div>
+      <div class="day-body">
+        <table class="ex-table">
+          <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="ex-name">Barbell Back Squat</div>
+                <a href="https://www.muscleandstrength.com/exercises/squat.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">4 × 6-8</td>
+              <td class="rest-time">2 min</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Romanian Deadlift (Dumbbell or Barbell)</div>
+                <a href="https://www.muscleandstrength.com/exercises/dumbbell-romanian-deadlift.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10-12</td>
+              <td class="rest-time">90 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Leg Press</div>
+                <a href="https://www.muscleandstrength.com/exercises/leg-press.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10-12</td>
+              <td class="rest-time">90 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Walking Lunges (Dumbbell)</div>
+                <a href="https://www.muscleandstrength.com/exercises/dumbbell-lunge.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 12 each</td>
+              <td class="rest-time">75 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Seated Calf Raises</div>
+                <a href="https://www.muscleandstrength.com/exercises/seated-calf-raise.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">4 × 15-20</td>
+              <td class="rest-time">45 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Plank Hold</div>
+                <a href="https://www.muscleandstrength.com/exercises/front-plank.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 30-45s</td>
+              <td class="rest-time">45 sec</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="cardio-block">
+          <h4>🏃 Post-Workout Cardio</h4>
+          <p>10 min stationary bike at moderate effort — keep RPMs at 70–80 and resistance low enough to maintain conversation. Easy on the legs after heavy squats.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-header-left">
+          <span class="day-num">DAY 3</span>
+          <div>
+            <div class="day-name">Upper Body — Pull Focus</div>
+            <div class="day-focus">Back, Biceps, Rear Delts</div>
+          </div>
+        </div>
+        <button class="day-toggle">▼</button>
+      </div>
+      <div class="day-body">
+        <table class="ex-table">
+          <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="ex-name">Barbell Bent-Over Row</div>
+                <a href="https://www.muscleandstrength.com/exercises/bent-over-barbell-row.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">4 × 8-10</td>
+              <td class="rest-time">90 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Lat Pulldown (Wide Grip)</div>
+                <a href="https://www.muscleandstrength.com/exercises/wide-grip-lat-pull-down.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10-12</td>
+              <td class="rest-time">75 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Seated Cable Row</div>
+                <a href="https://www.muscleandstrength.com/exercises/seated-cable-row.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10-12</td>
+              <td class="rest-time">75 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Face Pulls (Cable)</div>
+                <a href="https://www.muscleandstrength.com/exercises/face-pull.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 15</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Dumbbell Bicep Curls</div>
+                <a href="https://www.muscleandstrength.com/exercises/standing-dumbbell-curl.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10-12</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Hammer Curls</div>
+                <a href="https://www.muscleandstrength.com/exercises/standing-dumbbell-hammer-curl.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 12</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="cardio-block">
+          <h4>🏃 Post-Workout Cardio</h4>
+          <p>15 min incline treadmill walk (same as Day 1). This is perfect after a pull day since your legs are relatively fresh.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-header-left">
+          <span class="day-num">DAY 4</span>
+          <div>
+            <div class="day-name">Lower Body — Hypertrophy</div>
+            <div class="day-focus">Glutes, Hamstrings, Quads, Core</div>
+          </div>
+        </div>
+        <button class="day-toggle">▼</button>
+      </div>
+      <div class="day-body">
+        <table class="ex-table">
+          <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="ex-name">Conventional Deadlift</div>
+                <a href="https://www.muscleandstrength.com/exercises/deadlifts.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">4 × 5-6</td>
+              <td class="rest-time">2-3 min</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Bulgarian Split Squat</div>
+                <a href="https://www.muscleandstrength.com/exercises/dumbbell-bulgarian-split-squat.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10 each</td>
+              <td class="rest-time">75 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Leg Curl Machine</div>
+                <a href="https://www.muscleandstrength.com/exercises/leg-curl.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 12-15</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Leg Extension Machine</div>
+                <a href="https://www.muscleandstrength.com/exercises/leg-extension.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 12-15</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Standing Calf Raises</div>
+                <a href="https://www.muscleandstrength.com/exercises/standing-calf-raise.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">4 × 15-20</td>
+              <td class="rest-time">45 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Hanging Knee Raises</div>
+                <a href="https://www.muscleandstrength.com/exercises/hanging-knee-raise.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 12-15</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="cardio-block">
+          <h4>🏃 Post-Workout Cardio</h4>
+          <p>10 min rowing machine at easy pace (strokes/min around 22–24). Great for recovery and burns fat without stressing already-fatigued legs too much.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 5 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-header-left">
+          <span class="day-num">DAY 5</span>
+          <div>
+            <div class="day-name">Full Body + Cardio Finisher</div>
+            <div class="day-focus">Compounds, Abs, Extended Cardio</div>
+          </div>
+        </div>
+        <button class="day-toggle">▼</button>
+      </div>
+      <div class="day-body">
+        <table class="ex-table">
+          <thead><tr><th>Exercise</th><th>Sets × Reps</th><th>Rest</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="ex-name">Dumbbell Goblet Squat</div>
+                <a href="https://www.muscleandstrength.com/exercises/dumbbell-goblet-squat.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 12</td>
+              <td class="rest-time">75 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Dumbbell Flat Bench Press</div>
+                <a href="https://www.muscleandstrength.com/exercises/dumbbell-bench-press.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10</td>
+              <td class="rest-time">75 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Single Arm Dumbbell Row</div>
+                <a href="https://www.muscleandstrength.com/exercises/one-arm-dumbbell-row.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10 each</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Dumbbell Arnold Press</div>
+                <a href="https://www.muscleandstrength.com/exercises/arnold-press.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10</td>
+              <td class="rest-time">60 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Cable Crunches</div>
+                <a href="https://www.muscleandstrength.com/exercises/cable-crunch.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 15</td>
+              <td class="rest-time">45 sec</td>
+            </tr>
+            <tr>
+              <td>
+                <div class="ex-name">Dead Bug</div>
+                <a href="https://www.muscleandstrength.com/exercises/dead-bug.html" target="_blank" class="ex-link">Watch tutorial <svg viewBox="0 0 20 20" fill="currentColor"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"/><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"/></svg></a>
+              </td>
+              <td class="sets-reps">3 × 10 each</td>
+              <td class="rest-time">45 sec</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="cardio-block">
+          <h4>🏃 Extended Cardio Finisher</h4>
+          <p><strong>20–25 min total:</strong> Start with 5 min walking, then alternate 30 sec fast walk / 30 sec slow jog for 10–15 min, then cool down with 5 min easy walk. This interval style burns more fat than steady-state while staying beginner-friendly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Progressive Overload Rule:</strong> Once you can complete all sets at the top of the rep range with good form, increase weight by 2.5 kg (upper body) or 5 kg (lower body) the following week. Never sacrifice form for weight.
+    </div>
+  </div>
+
+  <!-- ==================== REST DAYS ==================== -->
+  <div class="section" id="sec-rest">
+    <div class="section-title">Rest Days — Days 6 & 7</div>
+    <div class="section-sub">Rest days are where your muscles actually grow and repair. Don't skip them. Here's exactly what to do on your two off days each week.</div>
+
+    <div class="rest-card">
+      <h3>Active Recovery (Day 6 — Saturday)</h3>
+      <ul>
+        <li><span class="icon">🚶</span><div><strong>30–40 min walk outdoors</strong> — Not a hike, not a jog. Just a relaxed walk. Sunlight and movement boost recovery hormones and reduce cortisol.</div></li>
+        <li><span class="icon">🧘</span><div><strong>15–20 min stretching or yoga</strong> — Focus on hip flexors, hamstrings, chest, and shoulders. These get tight from sitting and lifting. Try a beginner yoga flow on YouTube.</div></li>
+        <li><span class="icon">🎾</span><div><strong>Optional: light recreational sport</strong> — A casual game of badminton, swimming, cycling at an easy pace, or shooting hoops. Keep it fun, not competitive.</div></li>
+        <li><span class="icon">🫧</span><div><strong>Foam rolling / self-massage</strong> — Spend 10 min foam rolling your quads, IT band, upper back, and glutes. This reduces soreness and improves mobility for the next week.</div></li>
+      </ul>
+    </div>
+
+    <div class="rest-card">
+      <h3>Full Rest (Day 7 — Sunday)</h3>
+      <ul>
+        <li><span class="icon">😴</span><div><strong>Prioritize sleep</strong> — Aim for 7–9 hours. Sleep is the #1 muscle recovery tool. No training adaptation happens without quality sleep.</div></li>
+        <li><span class="icon">🍳</span><div><strong>Meal prep for the week</strong> — Cook chicken, rice, roast vegetables, boil eggs. Having food ready prevents bad decisions Monday through Friday.</div></li>
+        <li><span class="icon">📝</span><div><strong>Review your training log</strong> — Note which weights you used, where you felt strong, and where you struggled. Plan next week's progressions.</div></li>
+        <li><span class="icon">💧</span><div><strong>Hydrate extra</strong> — Drink 3–4 liters of water throughout the day. Add a pinch of salt if needed for electrolytes. Hydration directly impacts next week's performance.</div></li>
+        <li><span class="icon">🧠</span><div><strong>Mental reset</strong> — Do something you enjoy that isn't fitness-related. Read, watch a movie, spend time with friends. Mental freshness prevents burnout.</div></li>
+      </ul>
+    </div>
+
+    <div class="note">
+      <strong>Key Rule:</strong> If you're still very sore from the week, take both days as full rest. Soreness that lasts 3+ days means you're either not sleeping enough, not eating enough protein, or going too heavy too soon. Dial it back and let your body adapt.
+    </div>
+
+    <div class="rest-card" style="margin-top: 24px;">
+      <h3>Weekly Schedule Overview</h3>
+      <ul>
+        <li><span class="icon">📅</span><div><strong>Monday</strong> — Day 1: Upper Push</div></li>
+        <li><span class="icon">📅</span><div><strong>Tuesday</strong> — Day 2: Lower Strength</div></li>
+        <li><span class="icon">📅</span><div><strong>Wednesday</strong> — Day 3: Upper Pull</div></li>
+        <li><span class="icon">📅</span><div><strong>Thursday</strong> — Day 4: Lower Hypertrophy</div></li>
+        <li><span class="icon">📅</span><div><strong>Friday</strong> — Day 5: Full Body + Cardio Finisher</div></li>
+        <li><span class="icon">🟢</span><div><strong>Saturday</strong> — Active Recovery</div></li>
+        <li><span class="icon">🔴</span><div><strong>Sunday</strong> — Full Rest</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ==================== PROGRESSION ==================== -->
+  <div class="section" id="sec-progression">
+    <div class="section-title">6 to 12 Month Progression Plan</div>
+    <div class="section-sub">Your body adapts every 4–8 weeks. This roadmap phases your training so you keep making gains without plateauing. Each phase builds on the last.</div>
+
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-phase">Phase 1 · Months 1–2</div>
+        <div class="tl-title">Foundation & Habit Building</div>
+        <div class="tl-body">
+          <p><strong>Goal:</strong> Learn every exercise with perfect form. Build the habit of showing up 5 days a week. Don't chase heavy weights — chase proper movement patterns.</p>
+          <p><strong>Training:</strong> Follow the weekly split exactly as written above. Use moderate weights where you could do 2–3 more reps after your set ends (known as "reps in reserve" or RIR 2–3). This prevents injury while your joints, tendons, and muscles adapt.</p>
+          <p><strong>Cardio:</strong> Stick with 10–15 min post-workout walks/bike as prescribed. On weekends, add a 20–30 min walk outdoors.</p>
+          <p><strong>Fat Loss Target:</strong> Aim to lose 0.5–1 kg per week through a mild calorie deficit of 300–500 kcal below maintenance. Use a TDEE calculator to find your baseline.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Form first</span>
+            <span class="tl-tag">Light to moderate</span>
+            <span class="tl-tag">Build habits</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-phase">Phase 2 · Months 3–4</div>
+        <div class="tl-title">Progressive Overload Phase</div>
+        <div class="tl-body">
+          <p><strong>Goal:</strong> Start pushing yourself. Add weight every 1–2 weeks on compound lifts (bench, squat, deadlift, rows). Aim for RIR 1–2 (only 1–2 reps left in the tank).</p>
+          <p><strong>Training Changes:</strong> Add 1 extra set to compound movements (e.g., bench goes from 4×8 to 4×10, then add weight). Introduce Barbell Hip Thrusts on Day 4. Add chin-ups or assisted chin-ups on Day 3.</p>
+          <p><strong>Cardio Upgrade:</strong> Increase post-workout cardio to 15–20 min. Add one 25-min LISS (Low Intensity Steady State) session on Saturday — brisk walk, easy swim, or cycling.</p>
+          <p><strong>Expected Strength Gains:</strong> Bench press +10–15 kg, Squat +15–20 kg, Deadlift +15–25 kg from starting weights.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Add weight weekly</span>
+            <span class="tl-tag">Extra volume</span>
+            <span class="tl-tag">Chin-ups added</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-phase">Phase 3 · Month 5–6</div>
+        <div class="tl-title">Intermediate Transition</div>
+        <div class="tl-body">
+          <p><strong>Goal:</strong> You're no longer a pure beginner. Weekly weight jumps slow down — switch to adding weight every 2 weeks or adding reps before adding weight.</p>
+          <p><strong>Training Changes:</strong> Introduce a deload week every 4th week (reduce all weights by 40%, keep reps the same). Add drop sets on isolation exercises (lateral raises, curls, tricep pushdowns). Begin incorporating supersets to save time and boost calorie burn.</p>
+          <p><strong>Cardio Upgrade:</strong> Add one standalone 30-min cardio session mid-week — incline treadmill walk or stair climber. Post-workout cardio remains 15–20 min.</p>
+          <p><strong>Body Composition:</strong> By month 6, expect to have lost 6–10 kg of fat (if diet is consistent) and gained 3–5 kg of muscle. Take progress photos and measurements — the scale alone won't tell the full story.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Deload weeks</span>
+            <span class="tl-tag">Drop sets</span>
+            <span class="tl-tag">Supersets</span>
+            <span class="tl-tag">Progress photos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-phase">Phase 4 · Months 7–8</div>
+        <div class="tl-title">Strength Block</div>
+        <div class="tl-body">
+          <p><strong>Goal:</strong> Shift focus toward lower rep, heavier weight on big lifts to break through plateaus. This builds true strength that carries over to all exercises.</p>
+          <p><strong>Training Changes:</strong> On Days 1 and 2, move compounds to 5×5 heavy (bench, squat). On Day 4, deadlift goes to 5×3 heavy. Keep isolation work at 3×10-15 for muscle growth. Add paused reps on bench (1 sec pause at chest) and tempo squats (3 sec descent).</p>
+          <p><strong>Cardio:</strong> Maintain current cardio volume. Don't increase — heavy strength training is already very metabolically demanding. Keep 2–3 cardio sessions (15–20 min each) per week total.</p>
+          <p><strong>Strength Targets:</strong> Bench 1RM roughly bodyweight, Squat 1RM roughly 1.2× bodyweight, Deadlift 1RM roughly 1.5× bodyweight. These are achievable beginner milestones.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">5×5 heavy</span>
+            <span class="tl-tag">Tempo work</span>
+            <span class="tl-tag">Paused reps</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-phase">Phase 5 · Months 9–10</div>
+        <div class="tl-title">Hypertrophy & Definition</div>
+        <div class="tl-body">
+          <p><strong>Goal:</strong> Switch back to higher volume to grow muscle you've strengthened. This is where you start looking noticeably different.</p>
+          <p><strong>Training Changes:</strong> Move to a true Push/Pull/Legs/Upper/Lower 5-day split. Increase total weekly sets per muscle group to 15–20. Add cable flyes, preacher curls, lateral raise variations, and rear delt flyes. Rep ranges become 8–15 for most exercises.</p>
+          <p><strong>Cardio Strategy:</strong> If fat loss has stalled, add 2 short HIIT sessions per week (15 min: 20s sprint / 40s rest on bike or rower). Keep 1–2 LISS sessions. Total cardio: ~60–80 min per week.</p>
+          <p><strong>Nutrition Adjustment:</strong> If you've been in a deficit for 6+ months, take a 2-week "diet break" eating at maintenance calories. This resets metabolic hormones and prevents burnout.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">PPL split upgrade</span>
+            <span class="tl-tag">15–20 sets/muscle</span>
+            <span class="tl-tag">HIIT introduced</span>
+            <span class="tl-tag">Diet break</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-phase">Phase 6 · Months 11–12</div>
+        <div class="tl-title">Consolidation & New Goals</div>
+        <div class="tl-body">
+          <p><strong>Goal:</strong> Assess everything you've achieved. Test your strength maxes. Take comprehensive progress photos. Set goals for year two.</p>
+          <p><strong>Training:</strong> Alternate 3 weeks of hypertrophy with 1 week of strength testing (work up to heavy singles/doubles on big 3 lifts). This keeps both qualities sharp. Continue the PPL or Upper/Lower split based on personal preference.</p>
+          <p><strong>Cardio:</strong> Find a sustainable long-term cardio routine — 3 sessions per week of your preferred method (walking, cycling, swimming, sports). This is about lifelong heart health now, not just fat loss.</p>
+          <p><strong>12-Month Realistic Results:</strong> If consistent with training and nutrition — 8–15 kg fat lost, 5–8 kg lean muscle gained, major strength improvements across all lifts, visibly different physique, improved energy, sleep, and confidence.</p>
+          <div class="tl-tags">
+            <span class="tl-tag">Test maxes</span>
+            <span class="tl-tag">Progress audit</span>
+            <span class="tl-tag">Year 2 goals</span>
+            <span class="tl-tag">Lifestyle fitness</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== NUTRITION ==================== -->
+  <div class="section" id="sec-nutrition">
+    <div class="section-title">Nutrition & Recovery Tips</div>
+    <div class="section-sub">Training is only 50% of the equation. What you eat, how you sleep, and how you recover determine whether you actually see results.</div>
+
+    <div class="nutri-grid">
+      <div class="nutri-card">
+        <h4>🥩 Protein</h4>
+        <p>Eat <span class="highlight">1.6–2.2 g per kg</span> of bodyweight daily. For a 75 kg person, that's 120–165 g of protein. Spread across 4–5 meals. Sources: chicken, eggs, fish, paneer, Greek yogurt, whey protein, lentils, tofu.</p>
+      </div>
+      <div class="nutri-card">
+        <h4>🍚 Carbs</h4>
+        <p>Don't fear carbs — they fuel your workouts. Eat <span class="highlight">3–5 g per kg</span> bodyweight. Prioritize complex carbs: rice, oats, sweet potato, whole wheat roti, fruits. Have most carbs around your workout.</p>
+      </div>
+      <div class="nutri-card">
+        <h4>🥑 Fats</h4>
+        <p>Keep fats at <span class="highlight">0.8–1.2 g per kg</span> bodyweight. Healthy sources: nuts, avocado, olive oil, ghee, fatty fish. Fats support hormones — don't go below 50 g/day.</p>
+      </div>
+      <div class="nutri-card">
+        <h4>💧 Water</h4>
+        <p>Drink <span class="highlight">3–4 liters per day</span>. More if you sweat a lot. Dehydration kills performance and recovery. Carry a bottle everywhere. Add electrolytes if training in heat.</p>
+      </div>
+    </div>
+
+    <div class="section-title" style="font-size: 24px; margin-top: 30px;">Essential Tips for Beginners</div>
+
+    <ol class="tips-list">
+      <li><strong>Track your workouts.</strong> Use a simple notebook or phone app. Write down every exercise, weight, sets, and reps. Without tracking, you can't progressively overload.</li>
+      <li><strong>Sleep 7–9 hours every night.</strong> Muscle growth hormone peaks during deep sleep. Poor sleep = poor recovery = poor gains. Make this non-negotiable.</li>
+      <li><strong>Don't skip meals.</strong> Missing meals means missing protein. If you can't eat a full meal, have a quick shake or handful of nuts + boiled eggs. Consistency beats perfection.</li>
+      <li><strong>Form over ego.</strong> Nobody at the gym cares how much you lift. They respect good form. Bad form = injury = weeks of lost progress. Watch every tutorial link and practice with lighter weights first.</li>
+      <li><strong>Be patient.</strong> Visible changes take 8–12 weeks. Strength gains come faster (you'll notice within 3–4 weeks). Trust the process. Consistency over 12 months will transform your body.</li>
+      <li><strong>Limit alcohol.</strong> Alcohol directly impairs muscle protein synthesis and sleep quality. It's one of the biggest hidden saboteurs of gym progress. Limit to occasional social drinking.</li>
+      <li><strong>Supplements are optional.</strong> The only ones worth considering for beginners: whey protein (for convenience), creatine monohydrate (5g daily — well-researched and safe), and a multivitamin if your diet is limited.</li>
+      <li><strong>Don't compare your Day 1 to someone's Year 5.</strong> Everyone started where you are. The people who look great at the gym were once nervous beginners too. Focus on being better than last week's version of yourself.</li>
+    </ol>
+
+    <div class="note" style="margin-top: 24px;">
+      <strong>Remember:</strong> This plan is a general guide. If your friend has any pre-existing injuries, medical conditions, or specific limitations, it's always a good idea to consult a doctor or certified personal trainer before starting. Listen to your body — mild soreness is normal, sharp pain is not.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('sec-' + id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: document.querySelector('.tab-container').offsetTop - 10, behavior: 'smooth' });
+  }
+
+  function toggleDay(header) {
+    const body = header.nextElementSibling;
+    const toggle = header.querySelector('.day-toggle');
+    body.classList.toggle('open');
+    toggle.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
